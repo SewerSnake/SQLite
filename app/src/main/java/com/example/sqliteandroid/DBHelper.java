@@ -1,5 +1,6 @@
 package com.example.sqliteandroid;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -25,5 +26,14 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    public void addHighScore(String name, int points) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cvs = new ContentValues();
+        cvs.put("name", name);
+        cvs.put("points", points);
+        long id = db.insert("Highscores",null, cvs);
+        db.close();
     }
 }
